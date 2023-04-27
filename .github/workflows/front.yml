@@ -1,0 +1,47 @@
+name: React build
+on: 
+  push:                               # master Branch에서 push 이벤트가 일어났을 때만 실행
+    branches:
+      - front-end
+
+permissions:
+  contents: read
+  
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Cache node modules      # node modules 캐싱
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Install Dependencies    # 의존 파일 설치
+        run: npm install
+
+      - name: Build                   # React Build
+        run: npm run build
+
+      # aws user 연결
+      - name: Configure AWS credentials 
+        uses: aws-actions/configure-aws-credentials@v1 
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} 
+          aws-region: ap-northeast-2
+
+      # react 빌드한 /build를 s3로 업로드
+      - name: Upload /build to S3
+        env:
+          BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME}}
+        run: |
+          aws s3 sync \
+            ./build s3://$BUCKET_NAME
