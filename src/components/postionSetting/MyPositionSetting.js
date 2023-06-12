@@ -63,8 +63,8 @@ function MyPositionSetting() {
       </Typography>
       <Box
         sx={{
-          width: "100%",
-          height: "55vh",
+          width: "80%",
+          height: "45vh",
           minWidth: "md",
           maxWidth: "md",
           border: 1,

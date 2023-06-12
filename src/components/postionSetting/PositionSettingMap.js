@@ -30,7 +30,7 @@ export default function PositionSettingMap(props) {
                     strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                     strokeStyle: 'dashed', // 선의 스타일 입니다
                     fillColor: '#CFE7FF', // 채우기 색깔입니다
-                    fillOpacity: 0.4  // 채우기 불투명도 입니다
+                    fillOpacity: 0.35  // 채우기 불투명도 입니다
                 });
 
                 // 지도에 원을 표시합니다

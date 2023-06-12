@@ -1,17 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import React from 'react'
 import styles from './Restaurant.module.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {ButtonBase, Grid, IconButton} from "@mui/material";
-import { Stack, borderRadius } from "@mui/system";
 import {UserContext} from "../../store/UserContext";
 import {API} from "../../../utils/config";
 import * as status from "../../../utils/status";
@@ -77,7 +72,7 @@ export default function RestaurantList() {
                     );
                 })}
             </div>
-            <Box sx={{ display: "flex", justifyContent: "flex-start", mb: 3}}>
+            <Box sx={{ display: "flex", justifyContent: "flex-start"}}>
                 <IconButton
                     sx={{}}
                     color="primary"

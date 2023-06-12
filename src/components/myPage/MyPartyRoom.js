@@ -4,7 +4,6 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Grow,
   TableRow,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -17,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeIcon from "@mui/icons-material/Home";
-import Grid from "@mui/material/Grid";
 import MenuCard from "../restaurant/MenuCard";
 import Stack from "@mui/material/Stack";
 import { useQuery } from "@tanstack/react-query";
@@ -59,36 +57,6 @@ function findMyMenu(partyMembers, userName) {
   return [{ menuName: "", price: 0, num: 0 }];
 }
 
-// 두 개의 위도, 경도 사이의 거리를 미터 단위로 반환하는 함수
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  const earthRadius = 6371e3; // 지구의 반지름 (미터 단위)
-  const toRadians = (value) => (value * Math.PI) / 180; // 각도를 라디안으로 변환
-
-  // 위도 및 경도를 라디안으로 변환
-  const radLat1 = toRadians(lat1);
-  const radLon1 = toRadians(lon1);
-  const radLat2 = toRadians(lat2);
-  const radLon2 = toRadians(lon2);
-
-  // 위도 및 경도의 차이 계산
-  const deltaLat = radLat2 - radLat1;
-  const deltaLon = radLon2 - radLon1;
-
-  // Haversine 공식 적용
-  const a =
-    Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-    Math.cos(radLat1) *
-      Math.cos(radLat2) *
-      Math.sin(deltaLon / 2) *
-      Math.sin(deltaLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  // 거리 계산 (미터 단위)
-  const distance = earthRadius * c;
-
-  return Math.round(distance);
-}
-
 // 딜리버스 만료 시간이 몇 분 남았는지 반환하는 함수
 const getRemainTime = (expireTime) => {
   const expireDate = new Date(expireTime);
@@ -103,7 +71,7 @@ const getRemainTime = (expireTime) => {
 function MyPartyRoom() {
   const context = useContext(UserContext);
   const { userState, handleLogOut } = context;
-  const { username, userPos } = userState;
+  const { username } = userState;
 
   const navigate = useNavigate();
 
@@ -913,26 +881,11 @@ function MyPartyRoom() {
                     </Button>
                   )}
                 </Box>
-                <Box sx={{ width: "90%", margin: "auto" }}>
+                <Box sx={{ width: "95%", margin: "auto" }}>
                   <Stack spacing={3} sx={{}}>
                     {myMenu.map((item, index) => {
                       return (
-                        <Grid
-                          container
-                          direction="row"
-                          justifyContent="center"
-                          alignItems="center"
-                          key={index}
-                        >
-                          <Grid item xs={11}>
-                            <MenuCard key={index} menu={item} />
-                          </Grid>
-                          <Grid item xs={1} sx={{ pl: 1 }}>
-                            <Button variant="outlined" disableRipple={true} sx={{padding: isMobile && 0.5, minWidth: isMobile && '48px'}}>
-                              {item.num}
-                            </Button>
-                          </Grid>
-                        </Grid>
+                          <MenuCard key={index} menu={item} countNum={item.num} />
                       );
                     })}
                   </Stack>

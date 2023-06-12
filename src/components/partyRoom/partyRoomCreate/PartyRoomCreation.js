@@ -24,14 +24,6 @@ function getFutureExpireTime(expireTime) {
     currentDate.getTime() + Number(expireTime) * 60000
   ).toUTCString();
 
-  // const year = String(futureDate.getFullYear());
-  // const month = String(futureDate.getMonth() + 1).padStart(2, "0");
-  // const day = String(futureDate.getDate()).padStart(2, "0");
-  // const hours = String(futureDate.getHours()).padStart(2, "0");
-  // const minutes = String(futureDate.getMinutes()).padStart(2, "0");
-  // const seconds = String(futureDate.getSeconds()).padStart(2, "0");
-  // `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
   return futureDate;
 }
 
@@ -84,6 +76,7 @@ function PartyRoomCreation() {
     "나의 메뉴 결정",
   ];
 
+  // 모바일 진행 단계 문구
   const mobileLabelSteps = [
       "파티방",
       "위치",

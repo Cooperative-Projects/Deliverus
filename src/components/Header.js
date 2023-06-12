@@ -21,7 +21,6 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { UserContext } from "./store/UserContext";
 import TitleTab from "./headerComponents/TitleTab";
 import LinkTab from "./headerComponents/LinkTab";

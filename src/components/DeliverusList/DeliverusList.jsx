@@ -5,24 +5,17 @@ import React, {useContext, useState} from "react";
 import styles from './DeliverusList.module.css'
 import {UserContext} from "../store/UserContext";
 import {useLocation} from "react-router-dom";
-import Slide from "@mui/material/Slide";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import RecruitingPartyList from "../restaurant/RecruitingPartyList";
-import {Button, IconButton} from "@mui/material";
-
-
-// Dialog가 아래에서 위로 올라가는 느낌을 주기위해 선언한 변수
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+import {IconButton} from "@mui/material";
 
 const restaurantCategories = ["한식", "분식", "치킨", "아시안/양식", "족발/보쌈", "돈까스/일식", "카페/디저트", "찜탕", "패스트푸드", "피자"];
 
 // 해당 가게 주문을 위해 모집 중인 파티방을 보여주는 컴포넌트입니다.
 const DeliverusList = () => {
     // 설정한 도로명 주소, 위도/경도 가져오기
-    const {userState, handleLogOut} = useContext(UserContext);
-    const {userPosAddr, userPos} = userState;
+    const {userState} = useContext(UserContext);
+    const {userPosAddr} = userState;
 
     // 가게 정보 리스트
     const {state} = useLocation();
@@ -45,6 +38,7 @@ const DeliverusList = () => {
                 if (item.category === category) {
                     tempPartyList.push(item);
                 }
+                return null;
             })
             setFilteredPartyList(tempPartyList);
         }
@@ -60,7 +54,7 @@ const DeliverusList = () => {
                     );
                 })}
             </div>
-            <Box sx={{ display: "flex", justifyContent: "flex-start", mb: 3}}>
+            <Box sx={{ display: "flex", justifyContent: "flex-start"}}>
                 <IconButton
                     sx={{}}
                     color="primary"

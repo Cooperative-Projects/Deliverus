@@ -1,6 +1,7 @@
 .list_body {
     max-width: 750px;
     margin: auto;
+    padding: 5px;
 }
 
 .list_all {

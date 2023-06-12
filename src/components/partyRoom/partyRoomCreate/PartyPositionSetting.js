@@ -5,6 +5,36 @@ import Typography from "@mui/material/Typography";
 import {UserContext} from "../../store/UserContext";
 import TextField from "@mui/material/TextField";
 
+// 두 개의 위도, 경도 사이의 거리를 미터 단위로 반환하는 함수
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371e3; // 지구의 반지름 (미터 단위)
+    const toRadians = (value) => (value * Math.PI) / 180; // 각도를 라디안으로 변환
+
+    // 위도 및 경도를 라디안으로 변환
+    const radLat1 = toRadians(lat1);
+    const radLon1 = toRadians(lon1);
+    const radLat2 = toRadians(lat2);
+    const radLon2 = toRadians(lon2);
+
+    // 위도 및 경도의 차이 계산
+    const deltaLat = radLat2 - radLat1;
+    const deltaLon = radLon2 - radLon1;
+
+    // Haversine 공식 적용
+    const a =
+        Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+        Math.cos(radLat1) *
+        Math.cos(radLat2) *
+        Math.sin(deltaLon / 2) *
+        Math.sin(deltaLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    // 거리 계산 (미터 단위)
+    const distance = earthRadius * c;
+
+    return Math.round(distance);
+}
+
 function PartyPositionSetting(props) {
     // 처음 보여줄 Kakao map의 중심좌표
     // userState의 userPos가 null이 아니라면 그 값으로 초기화
@@ -35,7 +65,8 @@ function PartyPositionSetting(props) {
     const handleClickPosEvent = (position, detailAddr) => {
         setPartyPos(position);
         setPartyAddr(detailAddr);
-        props.propFunction(detailAddr, position, true);
+        const distance = calculateDistance(props.resPos.lat, props.resPos.lng, position.lat, position.lng);
+        props.propFunction(detailAddr, position, (distance <= 3000));
     }
 
     const handleDetailPosInput = (event) => {
@@ -47,7 +78,7 @@ function PartyPositionSetting(props) {
         <Typography variant="h2" sx={{mt: 5, mb: 6}}>
             픽업할 위치를 설정해 주세요!
         </Typography>
-        <Box sx={{width: "80%", height: "40vh", border: 1}}>
+        <Box sx={{width: "80%", height: "50vh", border: 1}}>
             <PositionSettingMap propFunction={handleClickPosEvent}
                                 initLatLng={initLatLng}
                                 resLatLng={props.resPos}
