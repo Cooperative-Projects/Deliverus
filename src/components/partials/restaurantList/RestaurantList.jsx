@@ -11,8 +11,8 @@ import {UserContext} from "../../store/UserContext";
 import {API} from "../../../utils/config";
 import * as status from "../../../utils/status";
 import RecruitingPartyList from "../../restaurant/RecruitingPartyList";
-import {useQuery} from "@tanstack/react-query";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import {useQuery} from "@tanstack/react-query";
 
 const restaurantCategories = ["한식", "분식", "치킨", "아시안/양식", "족발/보쌈", "돈까스/일식", "카페/디저트", "찜탕", "패스트푸드", "피자"];
 
@@ -36,23 +36,27 @@ export default function RestaurantList() {
     const isMobile = useMediaQuery("(max-width:750px");
 
     const handleCategories = (e) => {
-        const category = e.target.textContent;
+        const category = (e.target.textContent === "전체") ? "all" : e.target.textContent;
         setCurrentCategories(category);
-        setFilteredPartyList(filterPartyList(recruitingPartyList));
+        setFilteredPartyList(filterPartyList(recruitingPartyList, category));
     };
 
-    const filterPartyList = (recruitingPartyList) => {
-        if(recruitingPartyList) {
-            const filteredList = [];
+    const filterPartyList = (recruitingPartyList, category) => {
+        if(recruitingPartyList !== null && typeof recruitingPartyList !== "undefined") {
+            let filteredList = [];
 
             // 카테고리 확인하기
-            for (let i = 0; i < recruitingPartyList.length; i++) {
-                if (currentCategories === recruitingPartyList[i].category || currentCategories === "all") {
-                    filteredList.push(recruitingPartyList[i]);
-                }
+            if (category === "all"){
+                filteredList = recruitingPartyList.slice();
             }
 
-            console.log("filter : ", filteredList);
+            else {
+                for (let i = 0; i < recruitingPartyList.length; i++) {
+                    if (category === recruitingPartyList[i].category || category === "all") {
+                        filteredList.push(recruitingPartyList[i]);
+                    }
+                }
+            }
 
             // 현재 가장 많은 파티방 인원을 보유하고 있는 순으로 정렬합니다.
             filteredList.sort(function (a, b) {
@@ -60,6 +64,27 @@ export default function RestaurantList() {
             })
 
             return filteredList.slice(0, 3);
+        }
+        return null;
+    }
+
+    const filterRestList = (restInfoList, category) => {
+        if(restInfoList !== null && typeof restInfoList !== "undefined") {
+            let filteredList = [];
+
+            // 카테고리 확인하기
+            if (category === "all"){
+                filteredList = restInfoList.slice();
+            }
+            else {
+                for (let i = 0; i < restInfoList.length; i++) {
+                    if (category === restInfoList[i].category) {
+                        filteredList.push(restInfoList[i]);
+                    }
+                }
+            }
+
+            return (filteredList.length === 0) ? null : filteredList;
         }
         return null;
     }
@@ -108,46 +133,46 @@ export default function RestaurantList() {
     }, []);
 
     // react-query로 활성화된 파티방 받아오기
-    const {isLoading, error, queryData} = useQuery(
-        ["paryList"],
-        () => {
-            fetch(`${API.PARTY_ALL}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({
-                    latitude: userPos.lat,
-                    longitude: userPos.lng,
-                }),
-            })
-                .then((respones) => {
-                    status.handlePartyResponse(respones.status);
-                    return respones.json();
-                })
-                .then((data) => {
-                    //console.log("Respones Query Data from PARTY LIST API : ", data);
-                    setRecruitingPartyList(data);
-                    setFilteredPartyList(filterPartyList(data));
-                    return data;
-                })
-                .catch((error) => {
-                    // 로그인 만료 에러인 경우 로그아웃 실행
-                    if (error.name === "LoginExpirationError") {
-                        //console.log(`${error.name} : ${error.message}`);
-                    }
-                    //console.log(`${error.name} : ${error.message}`);
-                    return error;
-                });
-        },
-        {
-            refetchOnWindowFocus: true,
-            refetchInterval: 5000,
-            refetchIntervalInBackground: true,
-            retry: 0,
-        }
-    );
+     const {isLoading, error, queryData} = useQuery(
+         ["paryList"],
+         () => {
+             fetch(`${API.PARTY_ALL}`, {
+                 method: "POST",
+                 headers: {
+                     "Content-Type": "application/json",
+                 },
+                 credentials: "include",
+                 body: JSON.stringify({
+                     latitude: userPos.lat,
+                     longitude: userPos.lng,
+                 }),
+             })
+                 .then((respones) => {
+                     status.handlePartyResponse(respones.status);
+                     return respones.json();
+                 })
+                 .then((data) => {
+                     //console.log("Respones Query Data from PARTY LIST API : ", data);
+                     setRecruitingPartyList(data);
+                     //setFilteredPartyList(filterPartyList(data, currentCategories));
+                     return data;
+                 })
+                 .catch((error) => {
+                     // 로그인 만료 에러인 경우 로그아웃 실행
+                     if (error.name === "LoginExpirationError") {
+                         //console.log(`${error.name} : ${error.message}`);
+                     }
+                     //console.log(`${error.name} : ${error.message}`);
+                     return error;
+                 });
+         },
+         {
+             refetchOnWindowFocus: true,
+             refetchInterval: 5000,
+             refetchIntervalInBackground: true,
+             retry: 0,
+         }
+     );
 
     // 처음 화면이 띄워졌을 때 모든 인접 파티방 리스트를 받아옵니다.
     useEffect(() => {
@@ -169,7 +194,7 @@ export default function RestaurantList() {
             .then((data) => {
                 //console.log("Respones Data from PARTY LIST API : ", data);
                 setRecruitingPartyList(data);
-                setFilteredPartyList(filterPartyList(data));
+                setFilteredPartyList(filterPartyList(data, "all"));
             })
             .catch((error) => {
                 // 로그인 만료 에러인 경우 로그아웃 실행
@@ -249,11 +274,7 @@ export default function RestaurantList() {
                 <Typography variant="h2">{userPosAddr}</Typography>
             </Box>
             <div className={styles.list_card}>
-                {restInfoList && restInfoList.map((item, idx) => {
-                    if (
-                        currentCategories === 'all' ||
-                        currentCategories === item.category
-                    ) {
+                {filterRestList(restInfoList, currentCategories) ? filterRestList(restInfoList, currentCategories).map((item, idx) => {
                         return (
                             <RestaurantCard
                                 name={item.name}
@@ -265,10 +286,18 @@ export default function RestaurantList() {
                                 minOrderPrice={item.minOrderPrice}
                                 key={idx}
                             />
-                        );
-                    }
-                    return null;
-                })}
+                        );}) : (<Box
+                    sx={{
+                        backgroundColor: "info.main",
+                        textAlign: "center",
+                        paddingY: "10vh",
+                        borderRadius: 3,
+                    }}
+                >
+                    <Typography>{currentCategories === "all" || !currentCategories?
+                        "주변에 배달 가능한 가게가 없어요..." :
+                        `주변에 ${currentCategories} 가게가 없어요...`}</Typography>
+                </Box>)}
             </div>
         </div>
     );

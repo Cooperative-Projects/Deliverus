@@ -29,7 +29,7 @@ const DeliverusList = () => {
     const [currentCategories, setCurrentCategories] = useState(state ? state.category : "all");
 
     const handleCategories = (e) => {
-        const category = e.target.textContent;
+        const category = (e.target.textContent === "전체") ? "all" : e.target.textContent;
         setCurrentCategories(category);
 
         if (recruitingPartyList !== null) {

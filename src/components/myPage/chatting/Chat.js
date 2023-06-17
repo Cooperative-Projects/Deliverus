@@ -57,9 +57,6 @@ function Chat() {
 
     // 구독한 채널로부터 메세지가 왔을 때 호출되는 callback 함수
     const callback = (message) => {
-        console.log("call back!!");
-        console.log(JSON.parse(message.body));
-
         const data = JSON.parse(message.body);
 
         setChatLog(prevState => [...prevState, {
@@ -81,7 +78,7 @@ function Chat() {
                 return respones.text();
             })
             .then((data) => {
-                console.log("Respones Data from PARTY ID API : ", data);
+                //console.log("Respones Data from PARTY ID API : ", data);
                 // 사용자가 속해 있는 파티방이 있는 경우
                 if (Number(data) !== -1) {
                     setMyPartyId(data);
@@ -118,7 +115,7 @@ function Chat() {
                     channelId: Number(myPartyId)
                 },
                 debug: function (str) {
-                    console.log(str);
+                    //console.log(str);
                 },
                 heartbeatIncoming: 4000,
                 heartbeatOutgoing: 4000,
