@@ -49,7 +49,7 @@ const UserContextProvider = (props) => {
    * 로그아웃할 때, 서버에게 User의 Nickname을 전달해줌으로 로그아웃 구현
    */
   const handleLogOut = () => {
-    console.log("user nickname logout...: ", userState.username);
+    //console.log("user nickname logout...: ", userState.username);
     try {
       fetch(`${API.LOGOUT}`, {
         method: "POST",

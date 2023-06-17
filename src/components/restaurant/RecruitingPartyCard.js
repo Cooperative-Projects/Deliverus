@@ -1,17 +1,9 @@
 import { Box, ButtonBase } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
 import React, { useContext } from "react";
 import { UserContext } from "../store/UserContext";
 import LetterAvatar from "../ui/LetterAvatar";
-import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 // 딜리버스 만료 시간이 몇 분 남았는지 반환하는 함수
@@ -72,7 +64,7 @@ function RecruitingPartyCard(props) {
           </Grid>
           <Grid item xs={4} container justifyContent="flex-end">
             <Typography variant="body2" color="text.secondary">
-              {Math.round(recruitPartyInfo.distance.toLocaleString())}m
+              {(Math.round(recruitPartyInfo.distance)).toLocaleString()}m
             </Typography>
           </Grid>
           <Grid item xs={8} container justifyContent="flex-start">

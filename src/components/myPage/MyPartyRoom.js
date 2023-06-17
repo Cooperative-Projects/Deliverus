@@ -199,7 +199,7 @@ function MyPartyRoom() {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from Restaurant Info API : ", data);
+        //console.log("Respones Data from Restaurant Info API : ", data);
         setCountList(new Array(data.menu.menu.length).fill(0));
         setRestInfo(data);
       })
@@ -231,7 +231,7 @@ function MyPartyRoom() {
         return respones.text();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY DELETE API : ", data);
+        //console.log("Respones Data from PARTY DELETE API : ", data);
         setAlertType("info");
         setAlertMessage("딜리버스에서 나오셨습니다");
         setAlertOpen(true);
@@ -277,7 +277,7 @@ function MyPartyRoom() {
         return respones.text();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY ORDER API : ", data);
+        //console.log("Respones Data from PARTY ORDER API : ", data);
         setOpen(false);
         setAlertType("success");
         setAlertMessage("메뉴가 성공적으로 수정되었습니다");
@@ -335,7 +335,7 @@ function MyPartyRoom() {
         return respones.text();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY ID API : ", data);
+        //console.log("Respones Data from PARTY ID API : ", data);
         // 사용자가 속해 있는 파티방이 있는 경우
         if (Number(data) !== -1) {
           setMyPartyId(data);
@@ -373,7 +373,7 @@ function MyPartyRoom() {
           return respones.json();
         })
         .then((data) => {
-          console.log("Respones Data from PARTY API : ", data);
+          //console.log("Respones Data from PARTY API : ", data);
           const _myMenu = findMyMenu(data.partyMembers, username);
           setMyMenu(_myMenu);
           setMyPartyInfo(data);
@@ -433,7 +433,7 @@ function MyPartyRoom() {
               }
 
               axios.get(`${API.PARTY_FINISH}?id=${myPartyId}`).then((res) => {
-                console.log(res);
+                //console.log(res);
                 setDeliverTime(res.data.deliverTime);
               });
             }
@@ -441,9 +441,9 @@ function MyPartyRoom() {
           .catch((error) => {
             // 로그인 만료 에러인 경우 로그아웃 실행
             if (error.name === "LoginExpirationError") {
-              console.log(`${error.name} : ${error.message}`);
+              //console.log(`${error.name} : ${error.message}`);
             }
-            console.log(`${error.name} : ${error.message}`);
+            //console.log(`${error.name} : ${error.message}`);
             return error;
           });
       },
@@ -469,7 +469,7 @@ function MyPartyRoom() {
           return respones.json();
         })
         .then((data) => {
-          console.log("Respones Query Data from PARTY API : ", data);
+          //console.log("Respones Query Data from PARTY API : ", data);
           const _myMenu = findMyMenu(data.partyMembers, username);
           setMyMenu(_myMenu);
           setMyPartyInfo(data);
@@ -478,7 +478,7 @@ function MyPartyRoom() {
           if (myPartyId !== -1) {
             // 로그인 만료 에러인 경우 로그아웃 실행
             if (error.name === "LoginExpirationError") {
-              console.log(`${error.name} : ${error.message}`);
+              //console.log(`${error.name} : ${error.message}`);
             } else if (error.name === "NoDataError" && myPartyId !== -1) {
               setAlertType("error");
               setAlertMessage("파티방이 존재하지 않습니다");
@@ -488,7 +488,7 @@ function MyPartyRoom() {
               setAlertMessage("서버로부터 데이터를 받지 못했습니다");
               setAlertOpen(true);
             }
-            console.log(`${error.name} : ${error.message}`);
+            //console.log(`${error.name} : ${error.message}`);
           }
           return error;
         });
@@ -565,7 +565,9 @@ function MyPartyRoom() {
                   },
                 }
               )
-              .then((res) => console.log(res));
+              .then((res) => {
+                //console.log(res)
+              });
           } else {
             // 결제에 실패했을 때 로직
             setAlertType("warning");
@@ -587,7 +589,7 @@ function MyPartyRoom() {
         partyId: partyId,
       })
       .then((res) => {
-        console.log(res);
+        //console.log(res);
       })
       .catch((error) => {
         // 로그인 만료 에러인 경우 로그아웃 실행

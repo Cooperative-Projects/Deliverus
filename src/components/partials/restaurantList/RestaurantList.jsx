@@ -52,7 +52,7 @@ export default function RestaurantList() {
                 }
             }
 
-            console.log(filteredList);
+            console.log("filter : ", filteredList);
 
             // 현재 가장 많은 파티방 인원을 보유하고 있는 순으로 정렬합니다.
             filteredList.sort(function (a, b) {
@@ -93,9 +93,8 @@ export default function RestaurantList() {
                     return respones.json();
                 })
                 .then((data) => {
-                    console.log("Respones Data from Restaurant LIST API : ", data);
+                    //console.log("Respones Data from Restaurant LIST API : ", data);
                     setRestInfoList(data);
-                    setFilteredPartyList(filterPartyList(data));
                 })
                 .catch((error) => {
                     // 로그인 만료 에러인 경우 로그아웃 실행
@@ -106,7 +105,7 @@ export default function RestaurantList() {
                     console.log(`${error.name} : ${error.message}`);
                 });
         }
-    });
+    }, []);
 
     // react-query로 활성화된 파티방 받아오기
     const {isLoading, error, queryData} = useQuery(
@@ -128,7 +127,7 @@ export default function RestaurantList() {
                     return respones.json();
                 })
                 .then((data) => {
-                    console.log("Respones Query Data from PARTY LIST API : ", data);
+                    //console.log("Respones Query Data from PARTY LIST API : ", data);
                     setRecruitingPartyList(data);
                     setFilteredPartyList(filterPartyList(data));
                     return data;
@@ -136,9 +135,9 @@ export default function RestaurantList() {
                 .catch((error) => {
                     // 로그인 만료 에러인 경우 로그아웃 실행
                     if (error.name === "LoginExpirationError") {
-                        console.log(`${error.name} : ${error.message}`);
+                        //console.log(`${error.name} : ${error.message}`);
                     }
-                    console.log(`${error.name} : ${error.message}`);
+                    //console.log(`${error.name} : ${error.message}`);
                     return error;
                 });
         },
@@ -168,7 +167,7 @@ export default function RestaurantList() {
                 return respones.json();
             })
             .then((data) => {
-                console.log("Respones Data from PARTY LIST API : ", data);
+                //console.log("Respones Data from PARTY LIST API : ", data);
                 setRecruitingPartyList(data);
                 setFilteredPartyList(filterPartyList(data));
             })
@@ -178,9 +177,9 @@ export default function RestaurantList() {
                     console.log(`${error.name} : ${error.message}`);
                     handleLogOut();
                 }
-                console.log(`${error.name} : ${error.message}`);
+                //console.log(`${error.name} : ${error.message}`);
             });
-    });
+    }, []);
 
     return (
         <div className={styles.list_body}>

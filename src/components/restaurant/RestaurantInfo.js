@@ -62,7 +62,7 @@ const RestaurantInfo = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from Restaurant Info API : ", data);
+        //console.log("Respones Data from Restaurant Info API : ", data);
         setRestaurant(data);
       })
       .catch((error) => {
@@ -95,7 +95,7 @@ const RestaurantInfo = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY RESTAURANT API : ", data);
+        //console.log("Respones Data from PARTY RESTAURANT API : ", data);
         setRecruitingPartyList(data);
       })
       .catch((error) => {

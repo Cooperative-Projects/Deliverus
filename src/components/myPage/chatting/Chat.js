@@ -142,7 +142,7 @@ function Chat() {
             }
 
             client.onConnect = function (frame) {
-                console.log(frame);
+                //console.log(frame);
                 // Do something, all subscribes must be done is this callback
                 // This is needed because this will be executed after a (re)connect
 
@@ -159,7 +159,7 @@ function Chat() {
                             return respones.json();
                         })
                         .then((data) => {
-                            console.log("Respones Data from CHAT MESSAGE API : ", data);
+                            //console.log("Respones Data from CHAT MESSAGE API : ", data);
                             if (Array.isArray(data) && data.length === 0) {
                                 data.push({
                                     sender: username, time: "00:00",

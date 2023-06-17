@@ -77,7 +77,7 @@ const LogIn = ({ togglePage }) => {
     handleOpen();
     try {
       const result = await getLogInResult(loginData);
-      console.log("Login Success", result);
+      //console.log("Login Success", result);
       handleLogIn(result.userId);
     } catch (error) {
       // 로그인 시도 거부 에러 처리

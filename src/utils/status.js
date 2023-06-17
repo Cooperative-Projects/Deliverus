@@ -65,7 +65,6 @@ const handleRestaurantResponse = (statusNum) => {
     if (!checkStatus(statusNum)) {
         const error = new Error("Error occurred.");
 
-        console.log(statusNum);
         switch (statusNum) {
             // 요청한 것에 대한 데이터가 없을 때 에러 처리
             case 204:
@@ -97,7 +96,6 @@ const handlePartyResponse = (statusNum) => {
     if (!checkStatus(statusNum)) {
         const error = new Error("Error occurred.");
 
-        console.log(statusNum);
         switch (statusNum) {
             // 데이터가 없는 경우
             case 204:
@@ -135,7 +133,6 @@ const handleRecommendResponse = (statusNum) => {
     if (!checkStatus(statusNum)) {
         const error = new Error("Error occurred.");
 
-        console.log(statusNum);
         switch (statusNum) {
             // 로그인 시간이 만료된 에러 처리
             case 401:
@@ -162,7 +159,6 @@ const handleChatResponse = (statusNum) => {
     if (!checkStatus(statusNum)) {
         const error = new Error("Error occurred.");
 
-        console.log(statusNum);
         switch (statusNum) {
             // 로그인 시간이 만료된 에러 처리
             case 401:

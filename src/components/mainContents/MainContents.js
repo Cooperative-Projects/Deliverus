@@ -78,16 +78,16 @@ const MainContents = () => {
           return respones.json();
         })
         .then((data) => {
-          console.log("Respones Query Data from PARTY LIST API : ", data);
+          //console.log("Respones Query Data from PARTY LIST API : ", data);
           setRecruitingPartyList(data);
           return data;
         })
         .catch((error) => {
           // 로그인 만료 에러인 경우 로그아웃 실행
           if (error.name === "LoginExpirationError") {
-            console.log(`${error.name} : ${error.message}`);
+            //console.log(`${error.name} : ${error.message}`);
           }
-          console.log(`${error.name} : ${error.message}`);
+          //console.log(`${error.name} : ${error.message}`);
           return error;
         });
     },
@@ -117,16 +117,16 @@ const MainContents = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY LIST API : ", data);
+        //console.log("Respones Data from PARTY LIST API : ", data);
         setRecruitingPartyList(data);
       })
       .catch((error) => {
         // 로그인 만료 에러인 경우 로그아웃 실행
         if (error.name === "LoginExpirationError") {
-          console.log(`${error.name} : ${error.message}`);
+          //console.log(`${error.name} : ${error.message}`);
           handleLogOut();
         }
-        console.log(`${error.name} : ${error.message}`);
+        //console.log(`${error.name} : ${error.message}`);
       });
 
     // 처음 화면이 띄워졌을 때 모든 가게 리스트를 받아옵니다.
@@ -146,16 +146,16 @@ const MainContents = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from Restaurant LIST API : ", data);
+        //console.log("Respones Data from Restaurant LIST API : ", data);
         setRestInfoList(data);
       })
       .catch((error) => {
         // 로그인 만료 에러인 경우 로그아웃 실행
         if (error.name === "LoginExpirationError") {
-          console.log(`${error.name} : ${error.message}`);
+          //console.log(`${error.name} : ${error.message}`);
           handleLogOut();
         }
-        console.log(`${error.name} : ${error.message}`);
+        //console.log(`${error.name} : ${error.message}`);
       });
 
     // AI 추천 카테고리를 서버로부터 가져옵니다.
@@ -170,7 +170,7 @@ const MainContents = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from RECOMMEND API : ", data);
+        //console.log("Respones Data from RECOMMEND API : ", data);
         setRecommendList([
           data.top1,
           data.top2,
@@ -184,7 +184,7 @@ const MainContents = () => {
         if (error.name === "LoginExpirationError") {
           handleLogOut();
         }
-        console.log(`GET RECOMMEND API -> ${error.name} : ${error.message}`);
+        //console.log(`GET RECOMMEND API -> ${error.name} : ${error.message}`);
       });
   }, []);
 

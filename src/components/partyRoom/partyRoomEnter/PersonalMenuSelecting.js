@@ -79,7 +79,7 @@ function PersonalMenuSelecting() {
                 return respones.json();
             })
             .then((data) => {
-                console.log("Respones Data from Restaurant Info API : ", data);
+                //console.log("Respones Data from Restaurant Info API : ", data);
                 setRestaurant(data);
                 setCountList(new Array(data.menu.menu.length).fill(0));
             })
@@ -125,7 +125,7 @@ function PersonalMenuSelecting() {
                 return respones.text();
             })
             .then((data) => {
-                console.log("Respones Data from Party Member API : ", data);
+                //console.log("Respones Data from Party Member API : ", data);
                 // MyPage에서 나의 파티방 페이지로 이동
                 setAlertType("success");
                 setAlertMessage("파티방에 입장 완료하였습니다!")

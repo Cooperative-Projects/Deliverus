@@ -98,7 +98,7 @@ const Register = ({ togglePage }) => {
       userid: username,
       passwd: password,
     };
-    console.log(registerData);
+    //console.log(registerData);
     if (!validateForm(registerData)) {
       setAlertOpen(true);
       setUsername("");
@@ -110,7 +110,7 @@ const Register = ({ togglePage }) => {
 
     try {
       const result = await getRegistrationResult(registerData);
-      console.log("Registration Success", result);
+      //console.log("Registration Success", result);
       togglePage();
     } catch (error) {
       // 중복된 아이디, 닉네임 입력 에러 처리

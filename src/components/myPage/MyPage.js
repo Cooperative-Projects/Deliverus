@@ -117,7 +117,7 @@ export default function MyPage() {
                 return respones.text();
             })
             .then((data) => {
-                console.log("Respones Data from PARTY ID API : ", data);
+                //console.log("Respones Data from PARTY ID API : ", data);
                 // 사용자가 속해 있는 파티방이 있는 경우
                 if (Number(data) !== -1) {
                     setMyPartyId(Number(data));

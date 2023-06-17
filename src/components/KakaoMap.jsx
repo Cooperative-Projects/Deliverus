@@ -46,7 +46,6 @@ export default function KakoMap() {
               position: latlng
             });
             setMarker(newMarker);
-            console.log(latlng);
             newMarker.setMap(kakaoMap);
           };
           kakao.maps.event.addListener(kakaoMap, "click", clickHandler);

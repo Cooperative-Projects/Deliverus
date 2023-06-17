@@ -28,7 +28,7 @@ const Restaurant = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from Restaurant Category API : ", data);
+        //console.log("Respones Data from Restaurant Category API : ", data);
       })
       .catch((error) => {
         // 로그인 만료 에러인 경우 로그아웃 실행
@@ -52,7 +52,7 @@ const Restaurant = () => {
         return respones.json();
       })
       .then((data) => {
-        console.log("Respones Data from Restaurant All API : ", data);
+        //console.log("Respones Data from Restaurant All API : ", data);
       })
       .catch((error) => {
         // 로그인 만료 에러인 경우 로그아웃 실행

@@ -1,7 +1,6 @@
-import LogIn from "./partials/LogIn";
 import MainContents from "./mainContents/MainContents";
 import SignPage from "./partials/SignPage";
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { UserContext } from "./store/UserContext";
 import MyPositionSetting from "./postionSetting/MyPositionSetting";
 

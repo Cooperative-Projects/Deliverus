@@ -51,7 +51,7 @@ export default function RecommendationList(props) {
   // 추천 카테고리를 선택했을 때 callback 함수
   const handleClick = (event) => {
     event.preventDefault();
-    console.log(event.target.textContent);
+    //console.log(event.target.textContent);
     navigate(`/restaurant/list`, {
       state: {
         restInfoList: props.restInfoList,

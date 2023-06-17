@@ -182,7 +182,7 @@ function PartyRoomCreation() {
         return respones.text();
       })
       .then((data) => {
-        console.log("Respones Data from PARTY API : ", data);
+        //console.log("Respones Data from PARTY API : ", data);
         // MyPage에서 나의 파티방 페이지로 이동
         setAlertType("success");
         setAlertMessage("성공적으로 방이 생성되었습니다!")

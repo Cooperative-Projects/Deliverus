@@ -9,7 +9,6 @@ import {Box, Divider} from "@mui/material";
 
 // 파티방을 만들 때 설정 사항들을 최종적으로 보여주는 컴퍼넌트입니다.
 function PartyRoomCrateResult(props) {
-    console.log(props.partyInfo);
     return (
         <Fragment>
             <Box sx={{width: "95%", margin: "auto"}}>
