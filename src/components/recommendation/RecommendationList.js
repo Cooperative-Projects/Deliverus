@@ -81,7 +81,7 @@ export default function RecommendationList(props) {
 
   return (
     <Fragment>
-      <Typography paddingBottom={"4px"} variant="h6" component="h6">
+      <Typography paddingBottom={"16px"} variant="h2">
         🚀 AI가 추천해주는 현재 TOP 5 음식
       </Typography>
       <ScrollMenu

@@ -54,15 +54,15 @@ const DeliverusList = () => {
                     );
                 })}
             </div>
-            <Box sx={{ display: "flex", justifyContent: "flex-start"}}>
+            <Box sx={{display: "flex", justifyContent: "flex-start", alignItems: "center", mt: 3}}>
                 <IconButton
-                    sx={{}}
+                    sx={{px: 0}}
                     color="primary"
                     aria-label="more"
                 >
-                    <LocationOnIcon />
+                    <LocationOnIcon/>
                 </IconButton>
-                <h4>{userPosAddr}</h4>
+                <Typography variant="h2">{userPosAddr}</Typography>
             </Box>
             <div className={styles.list_card}>
                 {(filteredPartyList && (Array.isArray(filteredPartyList) && filteredPartyList.length !== 0)) ? (
@@ -76,7 +76,9 @@ const DeliverusList = () => {
                             borderRadius: 3,
                         }}
                     >
-                        <Typography>주변에 모집 중인 딜리버스가 없어요...</Typography>
+                        <Typography>{currentCategories === "all" || !currentCategories?
+                            "주변에 모집중인 딜리버스가 없어요..." :
+                            `주변에 ${currentCategories}을 시키는 딜리버스가 없어요...`}</Typography>
                     </Box>
                 )}
             </div>

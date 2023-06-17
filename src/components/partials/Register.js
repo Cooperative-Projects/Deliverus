@@ -10,8 +10,26 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
+import {createTheme, ThemeProvider} from "@mui/material";
 
 const Register = ({ togglePage }) => {
+  const regiTheme = createTheme({
+    typography: {
+      fontFamily: `"Roboto", sans-serif`,
+    },
+    palette: {
+      text: {
+        secondary: "grey",
+      },
+      primary: {
+        main: "#ff0700",
+      },
+      info: {
+        main: "#BABABA",
+      },
+    },
+  });
+
   // 알람창을 위한 변수입니다.
   const [alertOpen, setAlertOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -125,7 +143,9 @@ const Register = ({ togglePage }) => {
           회원가입
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <ThemeProvider theme={regiTheme}>
           <TextField
+            color="primary"
             margin="normal"
             required
             fullWidth
@@ -138,6 +158,7 @@ const Register = ({ togglePage }) => {
             onChange={handleNicknameInput}
           />
           <TextField
+            color="primary"
             margin="normal"
             required
             fullWidth
@@ -148,6 +169,7 @@ const Register = ({ togglePage }) => {
             onChange={handleIdInput}
           />
           <TextField
+            color="primary"
             margin="normal"
             required
             fullWidth
@@ -158,6 +180,7 @@ const Register = ({ togglePage }) => {
             value={password}
             onChange={handlePwInput}
           />
+          </ThemeProvider>
           <Typography fontSize="0.5rem" component="h3" variant="h5">
             모든 정보는 4자리 이상, 특수문자는 사용하면 안됩니다.
           </Typography>

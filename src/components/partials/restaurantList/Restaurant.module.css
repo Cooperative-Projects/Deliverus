@@ -51,3 +51,9 @@
 .list_location_wrapper {
     margin-bottom: 25px;
 }
+
+.show_more {
+    cursor: pointer;
+    text-decoration : underline;
+    font-weight: 500;
+}

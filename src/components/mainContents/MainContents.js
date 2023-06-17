@@ -224,7 +224,7 @@ const MainContents = () => {
       )}
       <div>
         <div className={styles.mainContents_subTitle}>
-          <Typography variant="h6" component="h6">
+          <Typography variant="h2">
             👥 내 근처 딜리버스
           </Typography>
 
@@ -252,7 +252,7 @@ const MainContents = () => {
           </Box>
         )}
         <div className={styles.mainContents_subTitle}>
-          <Typography variant="h6" component="h6">
+          <Typography variant="h2">
             🏪 내 근처 가게 리스트
           </Typography>
           <IconButton
@@ -301,7 +301,9 @@ const MainContents = () => {
       )}
       <div>
         <div className={styles.mainContents_subTitle}>
-          <h3>👥 내 근처에서 모집중인 딜리버스</h3>
+          <Typography variant="h2">
+            👥 내 근처에서 모집중인 딜리버스
+          </Typography>
           <h4 className={styles.show_more} onClick={navToPartyList}>
             더보기
           </h4>
@@ -321,7 +323,9 @@ const MainContents = () => {
           </Box>
         )}
         <div className={styles.mainContents_subTitle}>
-          <h3>🏪 내가 직접 딜리버스 모집하기</h3>
+          <Typography variant="h2">
+            🏪 내 근처에 있는 가게 리스트
+          </Typography>
           <h4 className={styles.show_more} onClick={navToRestaurantList}>
             더보기
           </h4>
