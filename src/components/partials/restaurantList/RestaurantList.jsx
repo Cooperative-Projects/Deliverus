@@ -194,7 +194,7 @@ export default function RestaurantList() {
             .then((data) => {
                 //console.log("Respones Data from PARTY LIST API : ", data);
                 setRecruitingPartyList(data);
-                setFilteredPartyList(filterPartyList(data, "all"));
+                setFilteredPartyList(filterPartyList(data, currentCategories));
             })
             .catch((error) => {
                 // 로그인 만료 에러인 경우 로그아웃 실행
