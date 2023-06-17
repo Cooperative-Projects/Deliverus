@@ -31,22 +31,28 @@ const DeliverusList = () => {
     const handleCategories = (e) => {
         const category = (e.target.textContent === "전체") ? "all" : e.target.textContent;
         setCurrentCategories(category);
-
         if (recruitingPartyList !== null) {
-            const tempPartyList = [];
-            recruitingPartyList.map((item, idx) => {
-                if (item.category === category) {
-                    tempPartyList.push(item);
-                }
-                return null;
-            })
+            let tempPartyList = [];
+            if(category === "all"){
+                tempPartyList =  recruitingPartyList.slice();
+            }
+
+            else {
+                recruitingPartyList.map((item, idx) => {
+                    if (item.category === category) {
+                        tempPartyList.push(item);
+                    }
+                    return null;
+                })
+            }
             setFilteredPartyList(tempPartyList);
         }
+
     }
 
     return (
         <div className={styles.list_body}>
-            <div className={styles.list_all} onClick={e => setCurrentCategories('all')}>전체</div>
+            <div className={styles.list_all} onClick={handleCategories}>전체</div>
             <div className={styles.list_category_wrapper}>
                 {restaurantCategories.map((items, idx) => {
                     return (

@@ -208,7 +208,7 @@ export default function RestaurantList() {
 
     return (
         <div className={styles.list_body}>
-            <div className={styles.list_all} onClick={e => setCurrentCategories('all')}>전체</div>
+            <div className={styles.list_all} onClick={handleCategories}>전체</div>
             <div className={styles.list_category_wrapper}>
                 {restaurantCategories.map((items, idx) => {
                     return (
